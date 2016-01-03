@@ -48,6 +48,7 @@
 		aTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerTriggered:) userInfo:nil repeats:YES];
 		[aSpinner setHidden:false];
 		[aSpinner startAnimating];
+        [UIApplication sharedApplication].idleTimerDisabled = true;
 	} else {
 		NSLog(@"Switched Off");
 		[locationController.locationManager stopUpdatingLocation];
@@ -55,7 +56,8 @@
 		[aSpinner setHidden:true];
 		[aSpinner stopAnimating];
 		[self emailData];
-	}
+        [UIApplication sharedApplication].idleTimerDisabled = false;
+    }
 }
 
 - (void)timerTriggered:(id)sender {
